@@ -201,3 +201,7 @@ sup {
     margin-bottom: 5px;
   }
 }
+
+.exportButtonsRight {
+  text-align: right;
+}
