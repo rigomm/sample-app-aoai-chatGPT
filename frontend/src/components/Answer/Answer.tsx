@@ -247,6 +247,7 @@ export const Answer = ({ answer, onCitationClicked, onExectResultClicked }: Prop
         <Stack.Item>
           <div className={styles.exportButtonsRight}>Icons </div>
           <Stack horizontal grow>
+            <Stack className={styles.exportButtonsRight}>Icons 1</Stack>
             <Stack.Item grow>
               {parsedAnswer && <ReactMarkdown
                 linkTarget="_blank"
@@ -260,6 +261,7 @@ export const Answer = ({ answer, onCitationClicked, onExectResultClicked }: Prop
                 components={components}
               />}
             </Stack.Item>
+            <Stack className={styles.exportButtonsRight}>Icons 2</Stack>
             <Stack.Item className={styles.answerHeader}>
               {FEEDBACK_ENABLED && answer.message_id !== undefined && (
                 <Stack horizontal horizontalAlign="space-between">
@@ -289,6 +291,7 @@ export const Answer = ({ answer, onCitationClicked, onExectResultClicked }: Prop
                 </Stack>
               )}
             </Stack.Item>
+            <Stack >Icons 3</Stack>
           </Stack>
         </Stack.Item>
         {parsedAnswer?.generated_chart !== null && (
@@ -325,7 +328,7 @@ export const Answer = ({ answer, onCitationClicked, onExectResultClicked }: Prop
             </Stack.Item>
           )}
           <Stack.Item className={styles.answerDisclaimerContainer}>
-            <span className={styles.answerDisclaimer}>AI-generated content may be incorrect2</span>
+            <span className={styles.answerDisclaimer}>AI-generated content may be incorrect</span>
           </Stack.Item>
           {!!answer.exec_results?.length && (
             <Stack.Item onKeyDown={e => (e.key === 'Enter' || e.key === ' ' ? toggleIsRefAccordionOpen() : null)}>
