@@ -245,9 +245,20 @@ export const Answer = ({ answer, onCitationClicked, onExectResultClicked }: Prop
     <>
       <Stack className={styles.answerContainer} tabIndex={0}>
         <Stack.Item>
-          <div className={styles.exportButtonsRight}>Icons </div>
+          
+          <Stack className={styles.exportButtonsRight}>
+            
+          <div className={styles.dropdown}>
+            <span>Export</span>
+            <div className={styles.dropdownContent}>
+              <p>Excel</p>
+              <p>Txt</p>
+              <p>PDF</p>
+            </div>
+          </div>
+          </Stack>
           <Stack horizontal grow>
-            <Stack className={styles.exportButtonsRight}>Icons 1</Stack>
+            
             <Stack.Item grow>
               {parsedAnswer && <ReactMarkdown
                 linkTarget="_blank"
@@ -261,7 +272,7 @@ export const Answer = ({ answer, onCitationClicked, onExectResultClicked }: Prop
                 components={components}
               />}
             </Stack.Item>
-            <Stack className={styles.exportButtonsRight}>Icons 2</Stack>
+            
             <Stack.Item className={styles.answerHeader}>
               {FEEDBACK_ENABLED && answer.message_id !== undefined && (
                 <Stack horizontal horizontalAlign="space-between">
@@ -291,7 +302,7 @@ export const Answer = ({ answer, onCitationClicked, onExectResultClicked }: Prop
                 </Stack>
               )}
             </Stack.Item>
-            <Stack >Icons 3</Stack>
+            
           </Stack>
         </Stack.Item>
         {parsedAnswer?.generated_chart !== null && (
