@@ -245,6 +245,7 @@ export const Answer = ({ answer, onCitationClicked, onExectResultClicked }: Prop
     <>
       <Stack className={styles.answerContainer} tabIndex={0}>
         <Stack.Item>
+          <div>Icons </div>
           <Stack horizontal grow>
             <Stack.Item grow>
               {parsedAnswer && <ReactMarkdown
