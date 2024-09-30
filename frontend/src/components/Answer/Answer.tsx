@@ -105,6 +105,13 @@ export const Answer = ({ answer, onCitationClicked, onExectResultClicked }: Prop
     await historyMessageFeedback(answer.message_id, newFeedbackState)
   }
 
+  const onExporExcelClicked = async (message: string|undefined) => {
+    ///Get  current content
+    alert(message);
+    //Sned to apy
+
+  }
+
   const onDislikeResponseClicked = async () => {
     if (answer.message_id == undefined) return
 
@@ -251,7 +258,7 @@ export const Answer = ({ answer, onCitationClicked, onExectResultClicked }: Prop
           <div className={styles.dropdown}>
             <span>Export</span>
             <div className={styles.dropdownContent}>
-              <p>Excel</p>
+              <p onClick={() => onExporExcelClicked(parsedAnswer?.markdownFormatText)}>Excel</p>
               <p>Txt</p>
               <p>PDF</p>
             </div>

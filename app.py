@@ -404,7 +404,7 @@ async def conversation_internal(request_body, request_headers):
 
 
 @bp.route("/conversation", methods=["POST"])
-async def conversation():
+async def conversation(): 
     if not request.is_json:
         return jsonify({"error": "request must be json"}), 415
     request_json = await request.get_json()
@@ -882,3 +882,32 @@ async def generate_title(conversation_messages) -> str:
 
 
 app = create_app()
+
+
+
+async def export_pdf(request_body):
+    try:
+        messages = request_body.get("message", [])
+        fileName = 'sample.pdf'
+        documentTitle = 'export'
+        textLines = [ 
+            'Technology makes us aware of', 
+            'the world around us.', 
+        ] 
+
+        if app_settings.azure_openai.stream and not app_settings.base_settings.use_promptflow:
+            result = await stream_chat_request(request_body, request_headers)
+            response = await make_response(format_as_ndjson(result))
+            response.timeout = None
+            response.mimetype = "application/json-lines"
+            return response
+        else:
+            result = await complete_chat_request(request_body, request_headers)
+            return jsonify(result)
+
+    except Exception as ex:
+        logging.exception(ex)
+        if hasattr(ex, "status_code"):
+            return jsonify({"error": str(ex)}), ex.status_code
+        else:
+            return jsonify({"error": str(ex)}), 500
