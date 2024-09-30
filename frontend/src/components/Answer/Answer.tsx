@@ -11,7 +11,8 @@ import supersub from 'remark-supersub'
 import { AskResponse, Citation, Feedback, historyMessageFeedback } from '../../api'
 import { XSSAllowTags, XSSAllowAttributes } from '../../constants/sanatizeAllowables'
 import { AppStateContext } from '../../state/AppProvider'
-
+import { saveAs } from 'file-saver';
+import * as XLSX from 'xlsx'
 import { parseAnswer } from './AnswerParser'
 
 import styles from './Answer.module.css'
@@ -107,7 +108,16 @@ export const Answer = ({ answer, onCitationClicked, onExectResultClicked }: Prop
 
   const onExporExcelClicked = async (message: string|undefined) => {
     ///Get  current content
-    alert(message);
+      console.log(message);
+      let data = [{Answer: message}];
+      const fileName= 'answer'
+      const worksheet = XLSX.utils.json_to_sheet(data);
+      const workbook = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+      const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+      const blob = new Blob([excelBuffer], {type: 'application/octet-stream'});
+      saveAs(blob, `${fileName}.xlsx`);
+
     //Sned to apy
 
   }
