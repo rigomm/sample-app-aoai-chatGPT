@@ -135,7 +135,10 @@ export const Answer = ({ answer, onCitationClicked, onExectResultClicked }: Prop
     //Sned to apy
 
   }
-  const MyPDF = (text: string | undefined) => (
+
+  const MyPDF = (text: string | undefined) => {
+    return (
+    <>
     <Document>
       <Page size="A4" >
         <View >
@@ -146,7 +149,9 @@ export const Answer = ({ answer, onCitationClicked, onExectResultClicked }: Prop
         </View>
       </Page>
     </Document>
-  );
+    </>
+    );
+  
 
   const onExporExcelClicked = async (message: string|undefined) => {
     ///Get  current content
