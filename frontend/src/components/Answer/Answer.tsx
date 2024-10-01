@@ -109,10 +109,11 @@ export const Answer = ({ answer, onCitationClicked, onExectResultClicked }: Prop
 
   const onExporFileClicked = async (exportType:string, message: string|undefined) => {
     ///Get  current content
+    const fileName= 'answer';
     switch(exportType){
       case 'Excel':
           let data = [{Answer: message}];
-          const fileName= 'answer'
+          
           const worksheet = XLSX.utils.json_to_sheet(data);
           const workbook = XLSX.utils.book_new();
           XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
@@ -123,11 +124,9 @@ export const Answer = ({ answer, onCitationClicked, onExectResultClicked }: Prop
         case 'Txt':
         break;
         case 'PDF':
-          const downloadPdf = async () => {
-            const fileName = 'answer.pdf';
-            const blob = await pdf(MyPDF(message)).toBlob();
-            saveAs(blob, fileName);
-          };
+          
+            const blobPDF = await pdf(MyPDF(message)).toBlob();
+            saveAs(blobPDF, `${fileName}.pdf`);
         break;
 
     }
@@ -399,7 +398,7 @@ export const Answer = ({ answer, onCitationClicked, onExectResultClicked }: Prop
             </Stack.Item>
           )}
           <Stack.Item className={styles.answerDisclaimerContainer}>
-            <span className={styles.answerDisclaimer}>AI-generated content may be incorrect3</span>
+            <span className={styles.answerDisclaimer}>AI-generated content may be incorrect4</span>
           </Stack.Item>
           {!!answer.exec_results?.length && (
             <Stack.Item onKeyDown={e => (e.key === 'Enter' || e.key === ' ' ? toggleIsRefAccordionOpen() : null)}>
