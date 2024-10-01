@@ -14,7 +14,7 @@ import { AppStateContext } from '../../state/AppProvider'
 import { saveAs } from 'file-saver';
 import * as XLSX from 'xlsx'
 import { parseAnswer } from './AnswerParser'
-
+import { pdf, Document, Page, View, StyleSheet } from '@react-pdf/renderer';
 import styles from './Answer.module.css'
 
 interface Props {
@@ -105,6 +105,49 @@ export const Answer = ({ answer, onCitationClicked, onExectResultClicked }: Prop
     // Update message feedback in db
     await historyMessageFeedback(answer.message_id, newFeedbackState)
   }
+
+
+  const onExporFileClicked = async (exportType:string, message: string|undefined) => {
+    ///Get  current content
+    switch(exportType){
+      case 'Excel':
+          let data = [{Answer: message}];
+          const fileName= 'answer'
+          const worksheet = XLSX.utils.json_to_sheet(data);
+          const workbook = XLSX.utils.book_new();
+          XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+          const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+          const blob = new Blob([excelBuffer], {type: 'application/octet-stream'});
+          saveAs(blob, `${fileName}.xlsx`);
+        break;
+        case 'Txt':
+        break;
+        case 'PDF':
+          const downloadPdf = async () => {
+            const fileName = 'answer.pdf';
+            const blob = await pdf(MyPDF(message)).toBlob();
+            saveAs(blob, fileName);
+          };
+        break;
+
+    }
+      
+
+    //Sned to apy
+
+  }
+  const MyPDF = (text: string | undefined) => (
+    <Document>
+      <Page size="A4" >
+        <View >
+          <Text>Section #1</Text>
+        </View>
+        <View >
+          <Text>{text}</Text>
+        </View>
+      </Page>
+    </Document>
+  );
 
   const onExporExcelClicked = async (message: string|undefined) => {
     ///Get  current content
@@ -268,9 +311,9 @@ export const Answer = ({ answer, onCitationClicked, onExectResultClicked }: Prop
           <div className={styles.dropdown}>
             <span>Export</span>
             <div className={styles.dropdownContent}>
-              <p onClick={() => onExporExcelClicked(parsedAnswer?.markdownFormatText)}>Excel</p>
-              <p>Txt</p>
-              <p>PDF</p>
+              <p onClick={() => onExporFileClicked('Excel',parsedAnswer?.markdownFormatText)}>Excel</p>
+              <p onClick={() => onExporFileClicked('Txt',parsedAnswer?.markdownFormatText)}>Txt</p>
+              <p onClick={() => onExporFileClicked('PDF',parsedAnswer?.markdownFormatText)}>PDF</p>
             </div>
           </div>
           </Stack>
