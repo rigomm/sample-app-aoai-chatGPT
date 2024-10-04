@@ -151,6 +151,7 @@ export const Answer = ({ answer, onCitationClicked, onExectResultClicked }: Prop
     </Document>
     </>
     );
+  }
   
 
   const onExporExcelClicked = async (message: string|undefined) => {
