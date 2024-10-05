@@ -125,6 +125,7 @@ export const Answer = ({ answer, onCitationClicked, onExectResultClicked }: Prop
         break;
         case 'PDF':
           
+            //const blobPDF = await pdf(MyPDF(message)).toBlob();
             const blobPDF = await pdf(MyPDF(message)).toBlob();
             saveAs(blobPDF, `${fileName}.pdf`);
         break;
@@ -151,7 +152,6 @@ export const Answer = ({ answer, onCitationClicked, onExectResultClicked }: Prop
     console.log(text);
     //style={styles.dropdownContent}
     return (
-    <>
     <Document>
       <Page size="A4" style={stylesPdf.page}>
         <View style={stylesPdf.section}>
@@ -162,7 +162,6 @@ export const Answer = ({ answer, onCitationClicked, onExectResultClicked }: Prop
         </View>
       </Page>
     </Document>
-    </>
     );
   }
   
