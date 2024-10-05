@@ -135,16 +135,29 @@ export const Answer = ({ answer, onCitationClicked, onExectResultClicked }: Prop
     //Sned to apy
 
   }
+  const stylesPdf = StyleSheet.create({
+    page: {
+      flexDirection: 'row',
+      backgroundColor: '#E4E4E4'
+    },
+    section: {
+      margin: 10,
+      padding: 10,
+      flexGrow: 1
+    }
+  });
 
   const MyPDF = (text: string | undefined) => {
+    console.log(text);
+    //style={styles.dropdownContent}
     return (
     <>
     <Document>
-      <Page size="A4" >
-        <View >
+      <Page size="A4" style={stylesPdf.page}>
+        <View style={stylesPdf.section}>
           <Text>Section #1</Text>
         </View>
-        <View >
+        <View style={stylesPdf.section}>
           <Text>{text}</Text>
         </View>
       </Page>
