@@ -8,7 +8,7 @@ import { ThumbDislike20Filled, ThumbLike20Filled } from '@fluentui/react-icons'
 import DOMPurify from 'dompurify'
 import remarkGfm from 'remark-gfm'
 import supersub from 'remark-supersub'
-import { AskResponse, Citation, Feedback, historyMessageFeedback } from '../../api'
+import { AskResponse, Citation, Feedback, historyMessageFeedback, exportFile } from '../../api'
 import { XSSAllowTags, XSSAllowAttributes } from '../../constants/sanatizeAllowables'
 import { AppStateContext } from '../../state/AppProvider'
 import { saveAs } from 'file-saver';
@@ -107,30 +107,55 @@ export const Answer = ({ answer, onCitationClicked, onExectResultClicked }: Prop
   }
 
 
-  const onExporFileClicked = async (exportType:string, message: string|undefined) => {
+  const onExporFileClicked = async (exportType:string, message: string | undefined) => {
     ///Get  current content
-    const fileName= 'answer';
+    let fileName= 'answer';
     switch(exportType){
       case 'Excel':
-          let data = [{Answer: message}];
-          
-          const worksheet = XLSX.utils.json_to_sheet(data);
-          const workbook = XLSX.utils.book_new();
-          XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
-          const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
-          const blob = new Blob([excelBuffer], {type: 'application/octet-stream'});
-          saveAs(blob, `${fileName}.xlsx`);
+       
+        fileName =  `${fileName}.xlsx`;
         break;
         case 'Txt':
+          fileName =  `${fileName}.txt`;
         break;
         case 'PDF':
-          
-            //const blobPDF = await pdf(MyPDF(message)).toBlob();
-            const blobPDF = await pdf(MyPDF(message)).toBlob();
-            saveAs(blobPDF, `${fileName}.pdf`);
+          fileName =  `${fileName}.pdf`;
         break;
-
     }
+
+    await exportFile(message??'', exportType) 
+    .then(async (response) => {
+      var blob = await response.blob();
+
+      saveAs(blob, fileName);
+      
+    })
+    .catch((err) => {
+      console.log(err);
+      
+    });
+
+    // switch(exportType){
+    //   case 'Excel':
+    //       let data = [{Answer: message}];
+          
+    //       const worksheet = XLSX.utils.json_to_sheet(data);
+    //       const workbook = XLSX.utils.book_new();
+    //       XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
+    //       const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+    //       const blob = new Blob([excelBuffer], {type: 'application/octet-stream'});
+    //       saveAs(blob, `${fileName}.xlsx`);
+    //     break;
+    //     case 'Txt':
+    //     break;
+    //     case 'PDF':
+          
+    //         //const blobPDF = await pdf(MyPDF(message)).toBlob();
+    //         const blobPDF = await pdf(MyPDF(message)).toBlob();
+    //         saveAs(blobPDF, `${fileName}.pdf`);
+    //     break;
+
+    // }
       
 
     //Sned to apy
