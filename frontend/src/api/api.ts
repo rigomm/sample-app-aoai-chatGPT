@@ -355,8 +355,10 @@ export const historyMessageFeedback = async (messageId: string, feedback: string
 
 
 export const exportFile = async (answer: string, exportFormat: string): Promise<Response> => {
-  const response = await fetch('https://funcaraexportdocuments.azurewebsites.net/api/FunExportFile?code=Kngy_KtKd1hKB7TFcxR_Adarx4taRKaghlriMi_DVL-mAzFuTsT08g%3D%3D', {
+
+  const response = await fetch('https://funpycaraexportdocuments.azurewebsites.net/api/ExportFile?code=B2CxUNJTzwkKmmJ5HEbO47AI4lZqoQa5kWXXT2TSa5mxAzFuXlW1Aw%3D%3D', {
     method: 'POST',
+    
     body: JSON.stringify({
       answer: answer,
       exportFormat:exportFormat
