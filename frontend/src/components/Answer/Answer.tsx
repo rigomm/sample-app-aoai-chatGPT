@@ -109,7 +109,12 @@ export const Answer = ({ answer, onCitationClicked, onExectResultClicked }: Prop
 
   const onExporFileClicked = async (exportType:string, message: string | undefined, model:any) => {
     ///Get  current content
-    console.log(model);
+    console.log( SANITIZE_ANSWER
+      ? DOMPurify.sanitize(model?.markdownFormatText, { ALLOWED_TAGS: XSSAllowTags, ALLOWED_ATTR: XSSAllowAttributes })
+      : parsedAnswer?.markdownFormatText);
+
+      console.log(DOMPurify.sanitize(model?.markdownFormatText, { ALLOWED_TAGS: XSSAllowTags, ALLOWED_ATTR: XSSAllowAttributes }));
+      
     let fileName= 'answer';
     switch(exportType){
       case 'Excel':
