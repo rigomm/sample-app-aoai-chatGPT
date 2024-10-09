@@ -107,8 +107,9 @@ export const Answer = ({ answer, onCitationClicked, onExectResultClicked }: Prop
   }
 
 
-  const onExporFileClicked = async (exportType:string, message: string | undefined) => {
+  const onExporFileClicked = async (exportType:string, message: string | undefined, model:any) => {
     ///Get  current content
+    console.log(model);
     let fileName= 'answer';
     switch(exportType){
       case 'Excel':
@@ -353,9 +354,9 @@ export const Answer = ({ answer, onCitationClicked, onExectResultClicked }: Prop
           <div className={styles.dropdown}>
             <span>Export</span>
             <div className={styles.dropdownContent}>
-              <p onClick={() => onExporFileClicked('Excel',parsedAnswer?.markdownFormatText)}>Excel</p>
-              <p onClick={() => onExporFileClicked('Txt',parsedAnswer?.markdownFormatText)}>Txt</p>
-              <p onClick={() => onExporFileClicked('PDF',parsedAnswer?.markdownFormatText)}>PDF</p>
+              <p onClick={() => onExporFileClicked('Excel',parsedAnswer?.markdownFormatText, parsedAnswer)}>Excel</p>
+              <p onClick={() => onExporFileClicked('Txt',parsedAnswer?.markdownFormatText, parsedAnswer)}>Txt</p>
+              <p onClick={() => onExporFileClicked('PDF',parsedAnswer?.markdownFormatText,parsedAnswer)}>PDF</p>
             </div>
           </div>
           </Stack>
