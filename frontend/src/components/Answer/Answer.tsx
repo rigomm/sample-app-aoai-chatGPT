@@ -17,6 +17,7 @@ import { parseAnswer } from './AnswerParser'
 import { pdf, Document, Page, View, StyleSheet } from '@react-pdf/renderer';
 import styles from './Answer.module.css'
 
+
 interface Props {
   answer: AskResponse
   onCitationClicked: (citedDocument: Citation) => void
@@ -109,23 +110,21 @@ export const Answer = ({ answer, onCitationClicked, onExectResultClicked }: Prop
 
   const onExporFileClicked = async (exportType:string, message: string | undefined, model:any) => {
     ///Get  current content
-    console.log( SANITIZE_ANSWER
-      ? DOMPurify.sanitize(model?.markdownFormatText, { ALLOWED_TAGS: XSSAllowTags, ALLOWED_ATTR: XSSAllowAttributes })
-      : parsedAnswer?.markdownFormatText);
 
-      console.log(DOMPurify.sanitize(model?.markdownFormatText, { ALLOWED_TAGS: XSSAllowTags, ALLOWED_ATTR: XSSAllowAttributes }));
-      
     let fileName= 'answer';
     switch(exportType){
       case 'Excel':
        
         fileName =  `${fileName}.xlsx`;
         break;
-        case 'Txt':
+        case 'Text':
           fileName =  `${fileName}.txt`;
         break;
         case 'PDF':
           fileName =  `${fileName}.pdf`;
+        break;
+        case 'Word':
+          fileName =  `${fileName}.docx`;
         break;
     }
 
@@ -360,8 +359,9 @@ export const Answer = ({ answer, onCitationClicked, onExectResultClicked }: Prop
             <span>Export</span>
             <div className={styles.dropdownContent}>
               <p onClick={() => onExporFileClicked('Excel',parsedAnswer?.markdownFormatText, parsedAnswer)}>Excel</p>
-              <p onClick={() => onExporFileClicked('Txt',parsedAnswer?.markdownFormatText, parsedAnswer)}>Txt</p>
+              <p onClick={() => onExporFileClicked('Word',parsedAnswer?.markdownFormatText, parsedAnswer)}>Txt</p>
               <p onClick={() => onExporFileClicked('PDF',parsedAnswer?.markdownFormatText,parsedAnswer)}>PDF</p>
+              <p onClick={() => onExporFileClicked('Text',parsedAnswer?.markdownFormatText, parsedAnswer)}>Txt</p>
             </div>
           </div>
           </Stack>
@@ -378,6 +378,7 @@ export const Answer = ({ answer, onCitationClicked, onExectResultClicked }: Prop
                 }
                 className={styles.answerText}
                 components={components}
+                
               />}
             </Stack.Item>
             
