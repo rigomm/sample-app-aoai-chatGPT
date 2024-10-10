@@ -359,9 +359,9 @@ export const Answer = ({ answer, onCitationClicked, onExectResultClicked }: Prop
             <span>Export</span>
             <div className={styles.dropdownContent}>
               <p onClick={() => onExporFileClicked('Excel',parsedAnswer?.markdownFormatText, parsedAnswer)}>Excel</p>
-              <p onClick={() => onExporFileClicked('Word',parsedAnswer?.markdownFormatText, parsedAnswer)}>Txt</p>
+              <p onClick={() => onExporFileClicked('Word',parsedAnswer?.markdownFormatText, parsedAnswer)}>Word</p>
               <p onClick={() => onExporFileClicked('PDF',parsedAnswer?.markdownFormatText,parsedAnswer)}>PDF</p>
-              <p onClick={() => onExporFileClicked('Text',parsedAnswer?.markdownFormatText, parsedAnswer)}>Txt</p>
+              <p onClick={() => onExporFileClicked('Text',parsedAnswer?.markdownFormatText, parsedAnswer)}>Text</p>
             </div>
           </div>
           </Stack>
