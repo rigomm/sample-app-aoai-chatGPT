@@ -1,13 +1,12 @@
 import { useContext, useEffect, useState } from 'react'
 import { Link, Outlet } from 'react-router-dom'
 import { Dialog, Stack, TextField } from '@fluentui/react'
-import { CopyRegular } from '@fluentui/react-icons'
-
-import { CosmosDBStatus } from '../../api'
+import { CopyRegular, Document20Filled,  DocumentPdf20Filled,  DocumentBorderPrint20Filled, ArrowExportLtr20Filled } from '@fluentui/react-icons'
+import { CosmosDBStatus, exportFile } from '../../api'
 import Contoso from '../../assets/Contoso.svg'
 import { HistoryButton, ShareButton } from '../../components/common/Button'
 import { AppStateContext } from '../../state/AppProvider'
-
+import { saveAs } from 'file-saver';
 import styles from './Layout.module.css'
 
 const Layout = () => {
@@ -38,6 +37,37 @@ const Layout = () => {
 
   const handleHistoryClick = () => {
     appStateContext?.dispatch({ type: 'TOGGLE_CHAT_HISTORY' })
+  }
+
+  const onExporFileClicked = async (exportType:string) => {
+    ///Get  current content
+
+    let fileName= 'answer';
+    switch(exportType){
+        case 'Text':
+          fileName =  `${fileName}.txt`;
+        break;
+        case 'PDF':
+          fileName =  `${fileName}.pdf`;
+        break;
+        case 'Word':
+          fileName =  `${fileName}.docx`;
+        break;
+    }
+
+    // await exportFile(message??'', exportType) 
+    // .then(async (response) => {
+    //   var blob = await response.blob();
+
+    //   saveAs(blob, fileName);
+      
+    // })
+    // .catch((err) => {
+    //   console.log(err);
+      
+    // });
+
+
   }
 
   useEffect(() => {
@@ -83,6 +113,39 @@ const Layout = () => {
               <h1 className={styles.headerTitle}>{ui?.title}</h1>
             </Link>
           </Stack>
+          <Stack className={styles.exportButtonsRight}>
+            <div className={styles.dropdown}>
+            <ArrowExportLtr20Filled
+                      aria-hidden="false"
+                      aria-label="Export"
+                      />
+              <span>Export</span>
+              <div className={styles.dropdownContent}>
+                <div onClick={() => onExporFileClicked('Word')} className={[styles.accordionIcon, styles.dropdownitem].join(' ')}>
+                <DocumentBorderPrint20Filled
+                      aria-hidden="false"
+                      aria-label="Word"
+                      />
+                      <span className={styles.spnExport}> Word</span>
+                      </div>
+                <div onClick={() => onExporFileClicked('PDF')} className={[styles.accordionIcon, styles.dropdownitem].join(' ')}>
+                <DocumentPdf20Filled
+                      aria-hidden="false"
+                      aria-label="PDF"
+                      />
+                      <span className={styles.spnExport}> PDF</span>
+                      </div>
+                <div onClick={() => onExporFileClicked('Text')} className={[styles.accordionIcon, styles.dropdownitem].join(' ')}>
+                <Document20Filled
+                      aria-hidden="false"
+                      aria-label="Text"
+                      />
+                      <span className={styles.spnExport}> Text</span>
+                      </div>
+              </div>
+            </div>
+            </Stack>
+
           <Stack horizontal tokens={{ childrenGap: 4 }} className={styles.shareButtonContainer}>
             {appStateContext?.state.isCosmosDBAvailable?.status !== CosmosDBStatus.NotConfigured && ui?.show_chat_history_button !== false && (
               <HistoryButton
