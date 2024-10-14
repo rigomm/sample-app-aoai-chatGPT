@@ -117,33 +117,33 @@ const Layout = () => {
           <Stack horizontal tokens={{ childrenGap: 4 }} className={styles.shareButtonContainer}>
 
           <Stack className={styles.exportButtonsRight}>
-            <div className={styles.dropdown}>
+            <div className={styles.dropdownExportAll}>
             <ArrowExportUp20Filled
                       aria-hidden="false"
                       aria-label="Export"
                       />
               <span>Export</span>
-              <div className={styles.dropdownContent}>
-                <div onClick={() => onExporFileClicked('Word')} className={[styles.accordionIcon, styles.dropdownitem].join(' ')}>
+              <div className={styles.dropdownContentAll}>
+                <div onClick={() => onExporFileClicked('Word')} className={[styles.accordionIcon, styles.dropdownItemAll].join(' ')}>
                 <DocumentBorderPrint20Filled
                       aria-hidden="false"
                       aria-label="Word"
                       />
-                      <span className={styles.spnExport}> Word</span>
+                      <span className={styles.spnExportAll}> Word</span>
                       </div>
-                <div onClick={() => onExporFileClicked('PDF')} className={[styles.accordionIcon, styles.dropdownitem].join(' ')}>
+                <div onClick={() => onExporFileClicked('PDF')} className={[styles.accordionIcon, styles.dropdownItemAll].join(' ')}>
                 <DocumentPdf20Filled
                       aria-hidden="false"
                       aria-label="PDF"
                       />
-                      <span className={styles.spnExport}> PDF</span>
+                      <span className={styles.spnExportAll}> PDF</span>
                       </div>
-                <div onClick={() => onExporFileClicked('Text')} className={[styles.accordionIcon, styles.dropdownitem].join(' ')}>
+                <div onClick={() => onExporFileClicked('Text')} className={[styles.accordionIcon, styles.dropdownItemAll].join(' ')}>
                 <Document20Filled
                       aria-hidden="false"
                       aria-label="Text"
                       />
-                      <span className={styles.spnExport}> Text</span>
+                      <span className={styles.spnExportAll}> Text</span>
                       </div>
               </div>
             </div>

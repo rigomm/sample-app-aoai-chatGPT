@@ -113,7 +113,7 @@
 
 
 
-.dropdown {
+.dropdownExportAll {
   position: relative;
   display: inline-block;
   width: 100px;
@@ -131,7 +131,7 @@
   height: 100%;
 }
 
-.dropdownContent {
+.dropdownContentAll {
   text-align: right;
   display: none;
   position: absolute;
@@ -145,18 +145,18 @@
   top: 30px;
 }
 
-.dropdownitem {
+.dropdownItemAll {
   display: block;
 }
-.dropdownitem:hover {
+.dropdownItemAll:hover {
   background-color: #f1f1f1;
   
 }
-.spnExport{
+.spnExportAll{
   vertical-align: top;
   font-size: 14px;
 }
 
-.dropdown:hover .dropdownContent {
+.dropdownExportAll:hover .dropdownContentAll {
   display: block;
 }
