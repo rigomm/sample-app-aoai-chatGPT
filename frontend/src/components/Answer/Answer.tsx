@@ -363,23 +363,31 @@ export const Answer = ({ answer, onCitationClicked, onExectResultClicked }: Prop
               <DocumentTable20Filled
                     aria-hidden="false"
                     aria-label="Excel"
-                    />Excel
+                    />
+                    <span className={styles.spnExport}> Excel</span>
+                    
                 </div>
               <div onClick={() => onExporFileClicked('Word',parsedAnswer?.markdownFormatText, parsedAnswer)} className={[styles.accordionIcon, styles.dropdownitem].join(' ')}>
               <DocumentBorderPrint20Filled
                     aria-hidden="false"
                     aria-label="Word"
-                    />Word</div>
+                    />
+                    <span className={styles.spnExport}> Word</span>
+                    </div>
               <div onClick={() => onExporFileClicked('PDF',parsedAnswer?.markdownFormatText,parsedAnswer)} className={[styles.accordionIcon, styles.dropdownitem].join(' ')}>
               <DocumentPdf20Filled
                     aria-hidden="false"
                     aria-label="PDF"
-                    />PDF</div>
+                    />
+                    <span className={styles.spnExport}> PDF</span>
+                    </div>
               <div onClick={() => onExporFileClicked('Text',parsedAnswer?.markdownFormatText, parsedAnswer)} className={[styles.accordionIcon, styles.dropdownitem].join(' ')}>
               <Document20Filled
                     aria-hidden="false"
                     aria-label="Text"
-                    />Text</div>
+                    />
+                    <span className={styles.spnExport}> Text</span>
+                    </div>
             </div>
           </div>
           </Stack>

@@ -233,6 +233,11 @@ sup {
   background-color: #f1f1f1;
   
 }
+.spnExport{
+  position: absolute;
+  top: 18px;
+  font-size: 14px;
+}
 
 .dropdown:hover .dropdownContent {
   display: block;
