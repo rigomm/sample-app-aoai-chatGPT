@@ -358,28 +358,28 @@ export const Answer = ({ answer, onCitationClicked, onExectResultClicked }: Prop
           <div className={styles.dropdown}>
             <span>Export</span>
             <div className={styles.dropdownContent}>
-              <p onClick={() => onExporFileClicked('Excel',parsedAnswer?.markdownFormatText, parsedAnswer)} className={styles.accordionIcon}>
+              <div onClick={() => onExporFileClicked('Excel',parsedAnswer?.markdownFormatText, parsedAnswer)} className={[styles.accordionIcon, styles.dropdownitem].join(' ')}>
                 {/* Document20Filled, DocumentText20Filled, DocumentPdf20Filled, DocumentTable20Filled, DocumentBorderPrint20Filled */}
               <DocumentTable20Filled
                     aria-hidden="false"
                     aria-label="Excel"
                     />Excel
-                </p>
-              <p onClick={() => onExporFileClicked('Word',parsedAnswer?.markdownFormatText, parsedAnswer)}>
+                </div>
+              <div onClick={() => onExporFileClicked('Word',parsedAnswer?.markdownFormatText, parsedAnswer)} className={[styles.accordionIcon, styles.dropdownitem].join(' ')}>
               <DocumentBorderPrint20Filled
                     aria-hidden="false"
                     aria-label="Word"
-                    />Word</p>
-              <p onClick={() => onExporFileClicked('PDF',parsedAnswer?.markdownFormatText,parsedAnswer)}>
+                    />Word</div>
+              <div onClick={() => onExporFileClicked('PDF',parsedAnswer?.markdownFormatText,parsedAnswer)} className={[styles.accordionIcon, styles.dropdownitem].join(' ')}>
               <DocumentPdf20Filled
                     aria-hidden="false"
                     aria-label="PDF"
-                    />PDF</p>
-              <p onClick={() => onExporFileClicked('Text',parsedAnswer?.markdownFormatText, parsedAnswer)}>
+                    />PDF</div>
+              <div onClick={() => onExporFileClicked('Text',parsedAnswer?.markdownFormatText, parsedAnswer)} className={[styles.accordionIcon, styles.dropdownitem].join(' ')}>
               <Document20Filled
                     aria-hidden="false"
                     aria-label="Text"
-                    />Text</p>
+                    />Text</div>
             </div>
           </div>
           </Stack>
