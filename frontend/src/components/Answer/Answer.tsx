@@ -4,7 +4,7 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { nord } from 'react-syntax-highlighter/dist/esm/styles/prism'
 import { Checkbox, DefaultButton, Dialog, FontIcon, Stack, Text } from '@fluentui/react'
 import { useBoolean } from '@fluentui/react-hooks'
-import { ThumbDislike20Filled, ThumbLike20Filled } from '@fluentui/react-icons'
+import { ThumbDislike20Filled, ThumbLike20Filled, Document20Filled, DocumentText20Filled, DocumentPdf20Filled, DocumentTable20Filled, DocumentBorderPrint20Filled } from '@fluentui/react-icons'
 import DOMPurify from 'dompurify'
 import remarkGfm from 'remark-gfm'
 import supersub from 'remark-supersub'
@@ -358,10 +358,28 @@ export const Answer = ({ answer, onCitationClicked, onExectResultClicked }: Prop
           <div className={styles.dropdown}>
             <span>Export</span>
             <div className={styles.dropdownContent}>
-              <p onClick={() => onExporFileClicked('Excel',parsedAnswer?.markdownFormatText, parsedAnswer)}>Excel</p>
-              <p onClick={() => onExporFileClicked('Word',parsedAnswer?.markdownFormatText, parsedAnswer)}>Word</p>
-              <p onClick={() => onExporFileClicked('PDF',parsedAnswer?.markdownFormatText,parsedAnswer)}>PDF</p>
-              <p onClick={() => onExporFileClicked('Text',parsedAnswer?.markdownFormatText, parsedAnswer)}>Text</p>
+              <p onClick={() => onExporFileClicked('Excel',parsedAnswer?.markdownFormatText, parsedAnswer)} className={styles.accordionIcon}>
+                {/* Document20Filled, DocumentText20Filled, DocumentPdf20Filled, DocumentTable20Filled, DocumentBorderPrint20Filled */}
+              <DocumentTable20Filled
+                    aria-hidden="false"
+                    aria-label="Excel"
+                    />Excel
+                </p>
+              <p onClick={() => onExporFileClicked('Word',parsedAnswer?.markdownFormatText, parsedAnswer)}>
+              <DocumentBorderPrint20Filled
+                    aria-hidden="false"
+                    aria-label="Word"
+                    />Word</p>
+              <p onClick={() => onExporFileClicked('PDF',parsedAnswer?.markdownFormatText,parsedAnswer)}>
+              <DocumentPdf20Filled
+                    aria-hidden="false"
+                    aria-label="PDF"
+                    />PDF</p>
+              <p onClick={() => onExporFileClicked('Text',parsedAnswer?.markdownFormatText, parsedAnswer)}>
+              <Document20Filled
+                    aria-hidden="false"
+                    aria-label="Text"
+                    />Text</p>
             </div>
           </div>
           </Stack>
