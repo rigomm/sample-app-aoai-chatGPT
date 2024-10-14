@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react'
 import { Link, Outlet } from 'react-router-dom'
 import { Dialog, Stack, TextField } from '@fluentui/react'
-import { CopyRegular, Document20Filled,  DocumentPdf20Filled,  DocumentBorderPrint20Filled, ArrowExportLtr20Filled } from '@fluentui/react-icons'
+import { CopyRegular, Document20Filled,  DocumentPdf20Filled,  DocumentBorderPrint20Filled, ArrowExportLtr20Filled, ArrowExportUp20Filled } from '@fluentui/react-icons'
 import { CosmosDBStatus, exportFile } from '../../api'
 import Contoso from '../../assets/Contoso.svg'
 import { HistoryButton, ShareButton } from '../../components/common/Button'
@@ -113,9 +113,12 @@ const Layout = () => {
               <h1 className={styles.headerTitle}>{ui?.title}</h1>
             </Link>
           </Stack>
+          
+          <Stack horizontal tokens={{ childrenGap: 4 }} className={styles.shareButtonContainer}>
+
           <Stack className={styles.exportButtonsRight}>
             <div className={styles.dropdown}>
-            <ArrowExportLtr20Filled
+            <ArrowExportUp20Filled
                       aria-hidden="false"
                       aria-label="Export"
                       />
@@ -146,7 +149,7 @@ const Layout = () => {
             </div>
             </Stack>
 
-          <Stack horizontal tokens={{ childrenGap: 4 }} className={styles.shareButtonContainer}>
+
             {appStateContext?.state.isCosmosDBAvailable?.status !== CosmosDBStatus.NotConfigured && ui?.show_chat_history_button !== false && (
               <HistoryButton
                 onClick={handleHistoryClick}
