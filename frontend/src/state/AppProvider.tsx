@@ -33,6 +33,9 @@ export interface AppState {
 }
 
 export type Action =
+  | { type: 'EXPORT_CHAT_TEXT' }
+  | { type: 'EXPORT_CHAT_PDF' }
+  | { type: 'EXPORT_CHAT_WORD' }
   | { type: 'TOGGLE_CHAT_HISTORY' }
   | { type: 'SET_COSMOSDB_STATUS'; payload: CosmosDBHealth }
   | { type: 'UPDATE_CHAT_HISTORY_LOADING_STATE'; payload: ChatHistoryLoadingState }
