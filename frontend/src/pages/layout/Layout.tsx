@@ -1,13 +1,14 @@
 import { useContext, useEffect, useState } from 'react'
 import { Link, Outlet } from 'react-router-dom'
 import { Dialog, Stack, TextField } from '@fluentui/react'
-import { CopyRegular, Document20Filled,  DocumentPdf20Filled,  DocumentBorderPrint20Filled, ArrowExportLtr20Filled, ArrowExportUp20Filled } from '@fluentui/react-icons'
-import { CosmosDBStatus, exportFile } from '../../api'
+import { CopyRegular, Document20Filled,  DocumentPdf20Filled,  DocumentBorderPrint20Filled, ArrowExportLtr20Filled, ArrowExportUp20Filled, ArrowDownload20Filled } from '@fluentui/react-icons'
+import { ChatMessage, CosmosDBStatus, exportFile } from '../../api'
 import Contoso from '../../assets/Contoso.svg'
 import { HistoryButton, ShareButton } from '../../components/common/Button'
 import { AppStateContext } from '../../state/AppProvider'
 import { saveAs } from 'file-saver';
 import styles from './Layout.module.css'
+const [messages, setMessages] = useState<ChatMessage[]>([])
 
 const Layout = () => {
   const [isSharePanelOpen, setIsSharePanelOpen] = useState<boolean>(false)
@@ -41,7 +42,8 @@ const Layout = () => {
 
   const onExporFileClicked = async (exportType:string) => {
     ///Get  current content
-
+    console.log('on export file cliclet, messages')
+    console.log(messages)
     let fileName= 'answer';
     switch(exportType){
         case 'Text':
@@ -118,7 +120,7 @@ const Layout = () => {
 
           <Stack className={styles.exportButtonsRight}>
             <div className={styles.dropdownExportAll}>
-            <ArrowExportUp20Filled
+            <ArrowDownload20Filled
                       aria-hidden="false"
                       aria-label="Export"
                       />
