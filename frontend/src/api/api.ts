@@ -1,6 +1,7 @@
 import { chatHistorySampleData } from '../constants/chatHistory'
 
 import { ChatMessage, Conversation, ConversationRequest, CosmosDBHealth, CosmosDBStatus, UserInfo } from './models'
+import { saveAs } from 'file-saver';
 
 export async function conversationApi(options: ConversationRequest, abortSignal: AbortSignal): Promise<Response> {
   const response = await fetch('/conversation', {
@@ -368,4 +369,47 @@ export const exportFile = async (answer: string, exportFormat: string): Promise<
     }
   });
   return response
+}
+
+
+
+export const ExporFileAll = (exportType:string, messages: ChatMessage[] ) => {
+  ///Get  current content
+
+  let fileName= 'chat';
+  switch(exportType){
+
+      case 'Text':
+        fileName =  `${fileName}.txt`;
+      break;
+      case 'PDF':
+        fileName =  `${fileName}.pdf`;
+      break;
+      case 'Word':
+        fileName =  `${fileName}.docx`;
+      break;
+  }
+  let text = ''
+  
+  messages.forEach((message:ChatMessage)=>{
+    if(text != ''){
+      text += '\n';
+    }
+    text += message.content;
+  });
+
+  exportFile(text, exportType) 
+  .then(async (response) => {
+    var blob = await response.blob();
+
+    saveAs(blob, fileName);
+    
+  })
+  .catch((err) => {
+    console.log(err);
+    
+  });
+
+
+
 }

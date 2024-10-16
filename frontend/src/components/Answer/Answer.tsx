@@ -140,30 +140,7 @@ export const Answer = ({ answer, onCitationClicked, onExectResultClicked }: Prop
       
     });
 
-    // switch(exportType){
-    //   case 'Excel':
-    //       let data = [{Answer: message}];
-          
-    //       const worksheet = XLSX.utils.json_to_sheet(data);
-    //       const workbook = XLSX.utils.book_new();
-    //       XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1');
-    //       const excelBuffer = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
-    //       const blob = new Blob([excelBuffer], {type: 'application/octet-stream'});
-    //       saveAs(blob, `${fileName}.xlsx`);
-    //     break;
-    //     case 'Txt':
-    //     break;
-    //     case 'PDF':
-          
-    //         //const blobPDF = await pdf(MyPDF(message)).toBlob();
-    //         const blobPDF = await pdf(MyPDF(message)).toBlob();
-    //         saveAs(blobPDF, `${fileName}.pdf`);
-    //     break;
 
-    // }
-      
-
-    //Sned to apy
 
   }
   const stylesPdf = StyleSheet.create({

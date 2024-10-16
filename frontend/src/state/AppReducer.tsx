@@ -1,19 +1,28 @@
 import { Action, AppState } from './AppProvider'
+import { ExporFileAll } from '../api'
 
 // Define the reducer function
 export const appStateReducer = (state: AppState, action: Action): AppState => {
   switch (action.type) {
     case 'EXPORT_CHAT_TEXT':
-      console.log('EXPORT_CHAT_TEXT')
-      console.log(state.currentChat?.messages)
-      return state
     case 'EXPORT_CHAT_PDF':
-      console.log('EXPORT_CHAT_PDF')
-      console.log(state.currentChat?.messages)
-      return state
     case 'EXPORT_CHAT_WORD':
-      console.log('EXPORT_CHAT_WORD')
-      console.log(state.currentChat?.messages)
+      let format = ''
+      if(action.type == 'EXPORT_CHAT_TEXT') {
+        format = 'Text'
+      } else if(action.type == 'EXPORT_CHAT_PDF') {
+        format = 'PDF'
+      } else if(action.type == 'EXPORT_CHAT_WORD') {
+        format = 'Word'
+      }
+      
+      if(state.currentChat != null){
+        ExporFileAll(format,state.currentChat.messages)
+      }
+      
+      
+      
+    
       return state
     case 'TOGGLE_CHAT_HISTORY':
       return { ...state, isChatHistoryOpen: !state.isChatHistoryOpen }
